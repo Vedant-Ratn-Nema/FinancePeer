@@ -1,0 +1,40 @@
+{% extends 'social/base.html' %}
+
+{% block content %}
+<h2>Add post</h2>
+
+<form  method="post" enctype="multipart/form-data">{% csrf_token %}
+
+  {%for field in post_form%}
+     <p>
+         {{field.label_tag}}
+         {{field}}
+
+         {% if field.help_text %}
+             <small style="color:gray">{{field.help_text}}</small>
+         {% endif %}
+
+         {% for error in field.errors %}
+             <p style="color:red">{{error}}></p>
+          {% endfor %}
+
+          {% if login_form.non_field_error %}
+             <div style="color:red">
+                 {{login_form.non_field_error}}
+             </div>
+          {% endif %}
+
+     </p>
+  {% endfor %}
+
+  <button type="Log in"> POST</button>
+</form>
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'social/base.html' %}
+
+{% block content %}
+
+{% for p in post %}
+
+    <h5 align="center">{{p.user.first_name}}<align="justify"/{{p.user.first_name}}h5>
+    <img src="{{p.image.url}}" alt="Paris" style="display: block;margin-left: auto;  margin-right: auto;  width: 50%;">
+    <h5 align="center">Caption: {{p.caption}}  <a href="{% url 'comment' %}{{p.id}}">Comment</a></h5>
+    {% for c in comment %}
+
+      {% if c.post.id is p.id %}
+
+        <p align="center">{{c.comment_text}}   :{{c.timestamp}} <a href="{% url 'reply' %}{{c.id}}">Reply</a></p>
+        {% for r in reply %}
+
+          {% if r.comment.id is c.id %}
+
+            <p align="center" style='color : blue'>{{r.reply_text}} :{{r.timestamp}} </p>
+
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    <p align="center">-----------------------------------------------------------------------------------------------------------------------</p>
+
+
+
+{% endfor %}
+
+{% endblock %}
